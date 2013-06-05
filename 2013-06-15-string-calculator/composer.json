@@ -1,0 +1,20 @@
+{
+    "name": "mkoubik/2013-06-15-string-calculator",
+    "require-dev": {
+        "nette/tester": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Matej Koubik",
+            "email": "matej@koubik.name"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
+    },
+    "require": {
+
+    }
+}
