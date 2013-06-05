@@ -20,3 +20,6 @@ Assert::equal(3 + 5 + 1 + 9, calculator()->add('3,5,1,9'));
 
 // Allow the Add method to handle new lines between numbers (instead of commas).
 Assert::equal(4 + 2 + 10, calculator()->add("4,2\n10"));
+
+// Allow different delimiter
+Assert::equal(1 + 2, calculator()->add("//;\n1;2"));
