@@ -13,4 +13,7 @@ Assert::equal(0, calculator()->add(''));
 Assert::equal(1, calculator()->add('1'));
 
 // Two numbers return its sum
-Assert::equal(3, calculator()->add('1,2'));
+Assert::equal(1 + 2, calculator()->add('1,2'));
+
+// Any number of numbers return its sum
+Assert::equal(3 + 5 + 1 + 9, calculator()->add('3,5,1,9'));
