@@ -1,11 +1,15 @@
 <?php
 
 class Calculator {
-	public function add($numbers)
+	public function add($string)
 	{
-		if ($numbers === '') {
+		if ($string === '') {
 			return 0;
 		}
-		return (int) $numbers;
+		$numbers = explode(',', $string);
+		if (count($numbers) === 2) {
+			return $numbers[0] + $numbers[1];
+		}
+		return (int) $string;
 	}
 }
