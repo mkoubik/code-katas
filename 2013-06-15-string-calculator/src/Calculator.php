@@ -10,6 +10,9 @@ class Calculator {
 		}
 		$string = str_replace("\n", $delimiter, $string);
 		$numbers = explode($delimiter, $string);
+		$numbers = array_filter($numbers, function($number) {
+			return $number <= 1000;
+		});
 		$negatives = array_filter($numbers, function ($number) {
 			return $number < 0;
 		});
