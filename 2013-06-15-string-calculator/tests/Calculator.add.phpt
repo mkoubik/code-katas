@@ -23,3 +23,8 @@ Assert::equal(4 + 2 + 10, calculator()->add("4,2\n10"));
 
 // Allow different delimiter
 Assert::equal(1 + 2, calculator()->add("//;\n1;2"));
+
+// Calling Add with a negative number will throw an exception
+Assert::exception(function() {
+	calculator()->add('-1,2');
+}, 'Exception', 'Negatives not allowed: -1');
