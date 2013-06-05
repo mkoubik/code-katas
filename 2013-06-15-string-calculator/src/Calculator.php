@@ -7,6 +7,12 @@ class Calculator
 	public function add($string)
 	{
 		$delimiter = $this->getDelimiter($string);
+		if (strpos($delimiter, '][')) {
+			$delimiters = explode('][', $delimiter);
+			foreach ($delimiters as $delimiter) {
+				$string = str_replace($delimiter, "\n", $string);
+			}
+		}
 		$string = str_replace("\n", $delimiter, $string);
 		$numbers = explode($delimiter, $string);
 		$numbers = array_filter($numbers, function($number) {
@@ -24,8 +30,8 @@ class Calculator
 	private function getDelimiter(&$string)
 	{
 		if (strpos($string, '//[') === 0) {
-			$delimiter = substr($string, 3, strpos($string, ']') - 3);
-			$string = substr($string, strpos($string, ']') + 2);
+			$delimiter = substr($string, 3, strpos($string, "\n") - 4);
+			$string = substr($string, strpos($string, "\n") + 1);
 			return $delimiter;
 		}
 		if (strpos($string, '//') === 0) {
