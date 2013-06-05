@@ -10,11 +10,8 @@ class Calculator {
 		}
 		$string = str_replace("\n", $delimiter, $string);
 		$numbers = explode($delimiter, $string);
-		$negatives = array();
-		array_walk($numbers, function($number) use (&$negatives) {
-			if ($number < 0) {
-				$negatives[] = $number;
-			}
+		$negatives = array_filter($numbers, function ($number) {
+			return $number < 0;
 		});
 		if (count($negatives) > 0) {
 			throw new Exception('Negatives not allowed: ' . implode(',', $negatives));
