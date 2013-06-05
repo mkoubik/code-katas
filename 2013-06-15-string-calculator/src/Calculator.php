@@ -10,11 +10,15 @@ class Calculator {
 		}
 		$string = str_replace("\n", $delimiter, $string);
 		$numbers = explode($delimiter, $string);
-		array_walk($numbers, function($number) {
+		$negatives = array();
+		array_walk($numbers, function($number) use (&$negatives) {
 			if ($number < 0) {
-				throw new Exception("Negatives not allowed: $number");
+				$negatives[] = $number;
 			}
 		});
+		if (count($negatives) > 0) {
+			throw new Exception('Negatives not allowed: ' . implode(',', $negatives));
+		}
 		return array_sum($numbers);
 	}
 }
