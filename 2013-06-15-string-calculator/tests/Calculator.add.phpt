@@ -40,3 +40,6 @@ Assert::equal(1 + 2 + 3, calculator()->add("//[***]\n1***2***3"));
 
 // Allow multiple delimiters, using this syntax: “//[*][%]\n1*2%3” returns 6
 Assert::equal(1 + 2 + 3, calculator()->add("//[*][%]\n1*2%3"));
+
+// Handle multiple delimiters of any length
+Assert::equal(5 + 2 + 15 + 6, calculator()->add("//[--][*][#$%]\n5*2#$%15--6"));
