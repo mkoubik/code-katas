@@ -3,12 +3,13 @@
 class Calculator {
 	public function add($string)
 	{
+		$delimiter = ',';
 		if (strpos($string, '//') === 0) {
-			$numbers = explode(substr($string, 2, 1), substr($string, 4));
-			return array_sum($numbers);
+			$delimiter = substr($string, 2, 1);
+			$string = substr($string, 4);
 		}
-		$string = str_replace("\n", ',', $string);
-		$numbers = explode(',', $string);
+		$string = str_replace("\n", $delimiter, $string);
+		$numbers = explode($delimiter, $string);
 		return array_sum($numbers);
 	}
 }
