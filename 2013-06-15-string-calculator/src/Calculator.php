@@ -6,15 +6,11 @@ class Calculator
 
 	public function add($string)
 	{
-		$delimiter = $this->getDelimiter($string);
-		if (strpos($delimiter, '][')) {
-			$delimiters = explode('][', $delimiter);
-			foreach ($delimiters as $delimiter) {
-				$string = str_replace($delimiter, "\n", $string);
-			}
+		$delimiters = $this->getDelimiters($string);
+		foreach ($delimiters as $delimiter) {
+			$string = str_replace($delimiter, self::DEFAULT_DELIMITER, $string);
 		}
-		$string = str_replace("\n", $delimiter, $string);
-		$numbers = explode($delimiter, $string);
+		$numbers = explode(self::DEFAULT_DELIMITER, $string);
 		$numbers = array_filter($numbers, function($number) {
 			return $number <= 1000;
 		});
@@ -27,18 +23,19 @@ class Calculator
 		return array_sum($numbers);
 	}
 
-	private function getDelimiter(&$string)
+	private function getDelimiters(&$string)
 	{
+		$delimiters = array("\n");
 		if (strpos($string, '//[') === 0) {
-			$delimiter = substr($string, 3, strpos($string, "\n") - 4);
+			$delimitersString = substr($string, 3, strpos($string, "\n") - 4);
 			$string = substr($string, strpos($string, "\n") + 1);
-			return $delimiter;
-		}
-		if (strpos($string, '//') === 0) {
-			$delimiter = substr($string, 2, 1);
+			$delimiters = array_merge($delimiters, explode('][', $delimitersString));
+		} else if (strpos($string, '//') === 0) {
+			$delimiters[] = substr($string, 2, 1);
 			$string = substr($string, 4);
-			return $delimiter;
+		} else {
+			$delimiters[] = self::DEFAULT_DELIMITER;
 		}
-		return self::DEFAULT_DELIMITER;
+		return $delimiters;
 	}
 }
