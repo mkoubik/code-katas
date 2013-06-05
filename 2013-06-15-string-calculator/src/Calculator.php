@@ -1,17 +1,12 @@
 <?php
 
-class Calculator {
+class Calculator
+{
+	const DEFAULT_DELIMITER = ',';
+
 	public function add($string)
 	{
-		$delimiter = ',';
-		if (strpos($string, '//[') === 0) {
-			$delimiter = substr($string, 3, strpos($string, ']') - 3);
-			$string = substr($string, strpos($string, ']') + 2);
-		}
-		if (strpos($string, '//') === 0) {
-			$delimiter = substr($string, 2, 1);
-			$string = substr($string, 4);
-		}
+		$delimiter = $this->getDelimiter($string);
 		$string = str_replace("\n", $delimiter, $string);
 		$numbers = explode($delimiter, $string);
 		$numbers = array_filter($numbers, function($number) {
@@ -24,5 +19,20 @@ class Calculator {
 			throw new Exception('Negatives not allowed: ' . implode(',', $negatives));
 		}
 		return array_sum($numbers);
+	}
+
+	private function getDelimiter(&$string)
+	{
+		if (strpos($string, '//[') === 0) {
+			$delimiter = substr($string, 3, strpos($string, ']') - 3);
+			$string = substr($string, strpos($string, ']') + 2);
+			return $delimiter;
+		}
+		if (strpos($string, '//') === 0) {
+			$delimiter = substr($string, 2, 1);
+			$string = substr($string, 4);
+			return $delimiter;
+		}
+		return self::DEFAULT_DELIMITER;
 	}
 }
