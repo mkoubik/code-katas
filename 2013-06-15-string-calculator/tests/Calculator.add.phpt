@@ -28,3 +28,6 @@ Assert::equal(1 + 2, calculator()->add("//;\n1;2"));
 Assert::exception(function() {
 	calculator()->add('-1,2');
 }, 'Exception', 'Negatives not allowed: -1');
+Assert::exception(function() {
+	calculator()->add('2,-4,3,-5');
+}, 'Exception', 'Negatives not allowed: -4,-5');
