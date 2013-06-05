@@ -31,3 +31,6 @@ Assert::exception(function() {
 Assert::exception(function() {
 	calculator()->add('2,-4,3,-5');
 }, 'Exception', 'Negatives not allowed: -4,-5');
+
+// Numbers bigger than 1000 should be ignored
+Assert::equal(2, calculator()->add('1001,2'));
