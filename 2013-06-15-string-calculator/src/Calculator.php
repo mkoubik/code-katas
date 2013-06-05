@@ -3,6 +3,8 @@
 class Calculator {
 	public function add($numbers)
 	{
-		# code...
+		if ($numbers === '') {
+			return 0;
+		}
 	}
 }
