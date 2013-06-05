@@ -4,6 +4,10 @@ class Calculator {
 	public function add($string)
 	{
 		$delimiter = ',';
+		if (strpos($string, '//[') === 0) {
+			$delimiter = substr($string, 3, strpos($string, ']') - 3);
+			$string = substr($string, strpos($string, ']') + 2);
+		}
 		if (strpos($string, '//') === 0) {
 			$delimiter = substr($string, 2, 1);
 			$string = substr($string, 4);
