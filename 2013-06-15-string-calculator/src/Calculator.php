@@ -6,5 +6,6 @@ class Calculator {
 		if ($numbers === '') {
 			return 0;
 		}
+		return (int) $numbers;
 	}
 }
